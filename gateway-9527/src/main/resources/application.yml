@@ -1,0 +1,29 @@
+server:
+  port: 9527
+eureka:
+  instance:
+    hostname: gateway-service
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心中动态创建路由的功能，利用微服务名进行路由
+      routes:
+        - id: payment-route #要求唯一
+#          uri: http://localhost:8001/
+          uri: lb://payment-service
+          predicates:
+            - Path=/payment/get/**
+        - id: payment-route2
+#          uri: http://localhost:8001/
+          uri: lb://payment-service
+          predicates:
+            - Path=/openfeign/timeout

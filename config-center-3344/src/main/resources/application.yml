@@ -1,0 +1,28 @@
+server:
+  port: 3344
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+spring:
+  application:
+    name: config-center
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/sofiworker/spring-cloud-config.git
+          search-paths:
+            - spring-cloud-config
+      label: master
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
