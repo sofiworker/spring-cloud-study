@@ -9,3 +9,8 @@ eureka:
 spring:
   application:
     name: order-service
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1 #表示采样率，介于0~1之间，1表示采集全部

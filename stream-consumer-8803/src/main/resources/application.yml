@@ -1,0 +1,28 @@
+server:
+  port: 8803
+spring:
+  application:
+    name: stream-consumer
+  cloud:
+    stream:
+      binders:
+        defaultRabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                username: guest
+                password: guest
+      bindings:
+        input:
+          destination: studyExchange
+          content-type: application/json
+#          group: consumer2
+#          group: consumer
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
